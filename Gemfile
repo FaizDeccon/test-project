@@ -34,6 +34,9 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+#uploading images to google cloud using carrierwave
+# gem 'carrierwave-google-storage'
+
 #uploading images to amazon s3
 gem 'carrierwave', '~> 2.0'
 gem 'fog', '~> 1.37.0'
@@ -58,6 +61,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'figaro'
 end
 
 group :test do

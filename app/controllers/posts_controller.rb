@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_post, only: %i[ show edit update destroy ]
 
   def index
     @posts = Post.all
@@ -17,8 +18,8 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: "Post successfully uploaded." }
-        format.json { render :show, status: :created, location: @post }
+        format.html { redirect_to :action => "index", notice: "Post successfully uploaded." }
+        format.json { render :index, status: :created, location: @post }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @post.errors, status: :unprocessable_entity }
@@ -27,11 +28,11 @@ class PostsController < ApplicationController
   end
 
   private
-    def set_article
-      @article = Article.find(params[:id])
+    def set_post
+      @post = Post.find(params[:id])
     end
 
-    def article_params
-      params.require(:article).permit(:title, :body)
+    def post_params
+      params.require(:post).permit({avatars: []}, :caption)
     end
 end

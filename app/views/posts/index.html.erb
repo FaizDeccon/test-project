@@ -1,10 +1,14 @@
 <p id="notice"><%= notice %></p>
 
 <% @posts.each do |post| %>
-    <%= post.image %>
+<% if post.user == current_user %>
+    <% post.avatars.each do |avatar| %>
+      <%= image_tag avatar.url %>
+    <% end %>
     <%= post.user.username %>
     <%= post.caption %>
     <%= post.like %>
+  <% end %>
 <% end %>
 
 <%= link_to 'New Post', new_post_path %>

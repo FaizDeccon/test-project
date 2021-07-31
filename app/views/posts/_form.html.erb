@@ -12,13 +12,13 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.label :avatars %>
+    <%= form.file_field :avatars, multiple: true %>
   </div>
 
   <div class="field">
-    <%= form.label :body %>
-    <%= form.text_area :body %>
+    <%= form.label :caption %>
+    <%= form.text_area :caption %>
   </div>
 
   <div class="actions">

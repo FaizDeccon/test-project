@@ -1,4 +1,4 @@
 class Post < ApplicationRecord
   belongs_to :user
-  has_many :images, as: :imageable
+  mount_uploaders :avatars, AvatarUploader
 end
