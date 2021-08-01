@@ -6,4 +6,15 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
         #  ,:confirmable, :lockable
+  def fullname
+    "#{firstname} #{lastname}"
+  end
+
+  def total_followers
+    0
+  end
+
+  def total_following
+    0
+  end
 end

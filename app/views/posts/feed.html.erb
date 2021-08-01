@@ -1,0 +1,21 @@
+<div>
+  <%= link_to 'New Post', new_post_path %>
+  <% if user_signed_in? %>
+    <%= link_to 'Log Out', destroy_user_session_path, method: :delete %>
+  <% end %>
+</div>
+<% @posts.each do |post| %>
+  <% if post.user == current_user %>
+    <div class="post-header">
+      <%= link_to image_tag(post.user.avatar.url, class: "img-circle"), posts_path(post.user.username) %>
+      <strong><%= link_to post.user.username, posts_path(post.user.username), class: "text-dark text-decoration-none" %></strong>
+    </div>
+    <%= image_tag post.avatars.first.url %>
+    <div class="post-footer">
+      <p><%= post.total_likes %> likes</p>
+      <strong><%= link_to post.user.username, posts_path(post.user.username), class: "text-dark text-decoration-none" %></strong>
+      <%= post.caption %>
+      <p class="text-muted"><%= time_ago_in_words post.created_at %> ago</p>
+    </div>
+  <% end %>
+<% end %>

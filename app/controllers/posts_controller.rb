@@ -6,11 +6,18 @@ class PostsController < ApplicationController
     @posts = Post.all
   end
 
+  def feed
+    @posts = Post.all
+  end
+
   def new
     @post = current_user.posts.build
   end
 
   def show
+  end
+
+  def edit
   end
 
   def create
