@@ -11,8 +11,18 @@
       <strong><%= link_to post.user.username, posts_path(post.user.username), class: "text-dark text-decoration-none" %></strong>
     </div>
     <%= image_tag post.avatars.first.url %>
+    <div class="post-header">
+      <% if post.liked?(current_user) %>
+        <%= link_to (icon('fas', 'heart', class: 'fa-2x')), unlike_path(post) %>
+      <% else %>
+        <%= link_to (icon('far', 'heart', class: 'fa-2x')), like_path(post) %>
+      <% end %>
+      <%= icon('far', 'comment', class: 'fa-2x') %>
+      <%# icon('far', 'heart')
+      icon('far', 'comment') %>
+    </div>
     <div class="post-footer">
-      <p><%= post.total_likes %> likes</p>
+      <p><%= post.likes.count %> likes</p>
       <strong><%= link_to post.user.username, posts_path(post.user.username), class: "text-dark text-decoration-none" %></strong>
       <%= post.caption %>
       <p class="text-muted"><%= time_ago_in_words post.created_at %> ago</p>
