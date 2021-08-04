@@ -1,0 +1,22 @@
+.liked{
+  color: red;
+}
+.post{
+  overflow: hidden;
+}
+.comments-scroll{
+  height: 240px;
+  overflow: scroll;
+}
+.comment-time{
+  font-size: 12px;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.comments-scroll::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.comments-scroll {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}

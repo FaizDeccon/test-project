@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <%= image_tag @posts.first.user.avatar.url, class: "profile-pic" %>
+    </div>
+    <div class="col-8">
+      <h1><%= @posts.first.user.username %></h1>
+      <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-secondary" %>
+      <div><%= @posts.count %> posts</div>
+      <div><%= @posts.first.user.total_followers %> followers</div>
+      <div><%= @posts.first.user.total_following %> following</div>
+      <p><%= @posts.first.user.fullname %></p>
+      <p><%= @posts.first.user.bio %></p>
+    </div>
+  </div>
+
+  <div class="row">
+    <% @posts.each do |post| %>
+      <div class="col-4">
+        <div class="insta-post">
+          <% if post.user == current_user %>
+            <% post.avatars.each do |avatar| %>
+              <%= link_to image_tag(avatar.url, class: "img img-fluid"), post_path(post) %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
