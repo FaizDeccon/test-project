@@ -2,7 +2,7 @@
 
 class PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_post, only: %i[show edit update destroy like unlike]
+  before_action :set_post, only: %i[show edit update destroy]
 
   def index
     @posts = Post.all
@@ -10,24 +10,16 @@ class PostsController < ApplicationController
 
   def feed
     @posts = Post.all
-  end
-
-  def like
-    @like = Like.create(post_id: @post.id, user_id: current_user.id)
-    redirect_to my_feed_path(@post)
-  end
-
-  def unlike
-    @like = @post.likes.find_by(user_id: current_user.id)
-    @like.destroy
-    redirect_to my_feed_path(@post)
+    @comment = Comment.new
   end
 
   def new
     @post = current_user.posts.build
   end
 
-  def show; end
+  def show
+    @comment = Comment.new
+  end
 
   def edit; end
 
