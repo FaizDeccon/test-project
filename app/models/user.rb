@@ -20,4 +20,15 @@ class User < ApplicationRecord
   def total_following
     0
   end
+
+  def self.text_search(query)
+    if query.present?
+      # where('username @@ :q or firstname @@ :q or lastname ilike :q', q: query)
+      where('similarity(username, ?) > 0.3', query).order("similarity(username, #{ActiveRecord::Base.connection.quote(query)}) DESC")
+      where('similarity(firstname, ?) > 0.3', query).order("similarity(firstname, #{ActiveRecord::Base.connection.quote(query)}) DESC")
+      where('similarity(lastname, ?) > 0.3', query).order("similarity(lastname, #{ActiveRecord::Base.connection.quote(query)}) DESC")
+    else
+      all
+    end
+  end
 end

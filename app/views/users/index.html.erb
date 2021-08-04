@@ -1,0 +1,12 @@
+<% @users.each do |user| %>
+  <div class="container">
+    <div class="row">
+      <div class="col-6 offset-3">
+        <%= link_to (image_tag user.avatar.url, class: "profile-pic-users"), profile_path(:user_id => user.id) %>
+        <%= link_to user.username, profile_path(:user_id => user.id), class: "text-dark text-decoration-none" %>
+        <%= link_to user.fullname, profile_path(:user_id => user.id), class: "text-dark text-decoration-none" %>
+      </div>
+    </div>
+  </div>
+<% end %>
+

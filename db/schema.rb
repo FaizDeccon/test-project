@@ -10,9 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_03_175412) do
+ActiveRecord::Schema.define(version: 2021_08_04_160256) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "btree_gin"
+  enable_extension "pg_trgm"
   enable_extension "plpgsql"
 
   create_table "comments", force: :cascade do |t|
@@ -67,7 +69,10 @@ ActiveRecord::Schema.define(version: 2021_08_03_175412) do
     t.string "phone"
     t.string "avatar"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["firstname"], name: "index_users_on_firstname", using: :gin
+    t.index ["lastname"], name: "index_users_on_lastname", using: :gin
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["username"], name: "index_users_on_username", using: :gin
   end
 
   add_foreign_key "comments", "posts"

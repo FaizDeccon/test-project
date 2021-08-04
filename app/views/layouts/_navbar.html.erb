@@ -4,17 +4,22 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
     <%= link_to "Instagram", "/feed", class: "navbar-brand" %>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" id="form1" type="search" placeholder="Search" aria-label="Search">
-    </form>
+    <%= form_tag users_path, class: "form-inline my-2 my-lg-0", method: :get do %>
+      <%# <input class="form-control mr-sm-2" id="form1" type="search" placeholder="Search" aria-label="Search"> %>
+      <%= search_field_tag :query, params[:query], class: "form-control mr-sm-2", id: "form1", placeholder: "Search", 'aria-label': "Search" %>
+    <% end %>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-        <%# <a class="nav-link" href="#">Home</a> %>
         <%= link_to "Home", "/feed", class: "nav-link" %>
       </li>
       <li class="nav-item">
-        <%# <a class="nav-link" href="#">Profile</a> %>
         <%= link_to "Profile", "/posts", class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'New Post', new_post_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: "nav-link" %>
       </li>
     </ul>
   </div>

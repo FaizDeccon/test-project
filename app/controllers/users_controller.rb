@@ -6,4 +6,9 @@ class UsersController < ApplicationController
   def profile_page
     @user = User.find(params[:user_id])
   end
+
+  def index
+    # @users = User.where.not(id: current_user.id)
+    @users = User.text_search(params[:query])
+  end
 end
