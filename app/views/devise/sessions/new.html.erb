@@ -1,26 +1,43 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<div class="container">
+  <div class="row">
+    <div class="col-3 offset-2">
+      <%= image_tag 'signup-image.png' %>
     </div>
-  <% end %>
+    <div class="col-3 offset-2 border-around m-top-15">
+      <h2 class="m-top-30">Instagram</h2>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="form-group m-top-15">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "Email" %>
+        </div>
+
+        <div class="form-group m-top-15">
+          <%= f.password_field :password, autocomplete: "current-password", class: "form-control", placeholder: "Password" %>
+        </div>
+
+        <% if devise_mapping.rememberable? %>
+          <div class="form-check m-top-15">
+            <%= f.check_box :remember_me, class: "form-check-input" %>
+            <%= f.label :remember_me, class: "form-check-label" %>
+          </div>
+        <% end %>
+
+        <div class="form-group m-top-15">
+          <%= f.submit "Log in", class: "btn btn-primary form-control" %>
+        </div>
+      <% end %>
+
+      <div class="m-top-15">
+        <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+          <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+        <% end %>
+      </div>
+
+      <div>
+        <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+          Don't have an account? <%= link_to "Sign up", new_registration_path(resource_name) %><br />
+        <% end %>
+      </div>
+    </div>
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

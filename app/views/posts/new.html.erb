@@ -1,5 +1,34 @@
-<h1>New Post</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-4 offset-4">
+    <h2>New Post</h2>
+      <%= form_with(model: @post, local: true) do |form| %>
+        <% if @post.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from uploading:</h2>
 
-<%= render 'form', post: @post %>
+            <ul>
+            <% @post.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
 
-<%= link_to 'My Feed', posts_path %>
+        <div class="form-group">
+          <%= form.label :avatars %>
+          <%= form.file_field :avatars, multiple: true, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :caption %>
+          <%= form.text_area :caption, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.submit "Upload", class: "btn btn-primary form-control" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,42 +1,51 @@
-<div>
-  <%= link_to 'New Post', new_post_path %>
-  <% if user_signed_in? %>
-    <%= link_to 'Log Out', destroy_user_session_path, method: :delete %>
-  <% end %>
-</div>
 <div class="container">
   <div class="row">
-    <% @posts.each do |post| %>
-      <div class="post col-6 offset-3">
-        <div class="post-header">
-          <%= link_to image_tag(post.user.avatar.url, class: "img-circle"), profile_path(:user_id => post.user_id) %>
-          <strong><%= link_to post.user.username, profile_path(:user_id => post.user_id), class: "text-dark text-decoration-none" %></strong>
-        </div>
-        <%= image_tag post.avatars.first.url %>
-        <div class="post-responses">
-          <i class="fas fa-heart fa-2x like-<%= post.id %> <%= 'liked' if post_liked_by_user?(post.id) %> like-btn" data-id="<%= post.id %>"></i>
-          <%= link_to post_path(post.id) do %>
-            <i class="far fa-comment fa-2x comment-btn"></i>
-          <% end %>
-        </div>
-        <div class="post-footer">
-          <p id="post-<%= post.id %>-likes"><%= post.total_likes %> likes</p>
-          <strong><%= link_to post.user.username, profile_path(:user_id => post.user_id), class: "text-dark text-decoration-none" %></strong>
-          <%= post.caption %>
-          <p class="text-muted"><%= time_ago_in_words post.created_at %> ago</p>
-        </div>
-        <%= link_to "View all comments", post_path(post.id), class: "text-muted" %>
-        <%= render "posts/comments", post: post, comments: Comment.includes(:user).where(post_id: post.id), feed: true %>
-        <div class="post-comment">
-          <%= form_for @comment do |f| %>
-            <%= f.hidden_field :post_id, value: post.id %>
-            <div class="input-group">
-              <%= f.text_field :comment, placeholder: 'Add a comment...', class: "form-control" %>
-              <div class="input-group-append"><%= f.submit "Post", class: "btn btn-success float-right" %></div>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
+    <div class="story col-6 offset-3">
+      <h2>Stories</h2>
+      <% @users.each do |user| %>
+        <% if (@following_ids.include? user.id)  && (user.stories.count > 0) %>
+          <%= link_to profile_picture(user, 80, 80), story_path(:id => user.id) %>
+        <% end %>
+      <% end %>
+      <%= link_to "Add story", new_story_path %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="post col-6 offset-3">
+      <h2>Posts</h2>
+      <% @posts.each do |post| %>
+        <% if @following_ids.include? post.user_id %>
+          <div class="post-header">
+            <%= link_to profile_picture(post.user, 80, 80), profile_path(:user_id => post.user_id) %>
+            <strong><%= link_to post.user.username, profile_path(:user_id => post.user_id), class: "text-dark text-decoration-none" %></strong>
+          </div>
+          <%= image_tag post.avatars.first.url, alt: 'post' %>
+          <div class="post-responses">
+            <i class="fas fa-heart fa-2x like-<%= post.id %> <%= 'liked' if post_liked_by_user?(post.id) %> like-btn" data-id="<%= post.id %>"></i>
+            <%= link_to post_path(post.id) do %>
+              <i class="far fa-comment fa-2x comment-btn"></i>
+            <% end %>
+          </div>
+          <div class="post-footer">
+            <p id="post-<%= post.id %>-likes"><%= post.total_likes %> likes</p>
+            <strong><%= link_to post.user.username, profile_path(:user_id => post.user_id), class: "text-dark text-decoration-none" %></strong>
+            <%= post.caption %>
+            <p class="text-muted"><%= time_ago_in_words post.created_at %> ago</p>
+          </div>
+          <%= link_to "View all comments", post_path(post.id), class: "text-muted" %>
+          <%= render "posts/comments", post: post, comments: Comment.includes(:user).where(post_id: post.id), feed: true %>
+          <div class="post-comment">
+            <%= form_with class: "comment-form", model: (@comment) do |f| %>
+              <%= f.hidden_field :post_id, value: post.id %>
+              <div class="input-group">
+                <%= f.text_field :comment, placeholder: 'Add a comment...', class: "form-control comment-area" %>
+                <div class="input-group-append"><%= f.submit "Post", class: "btn btn-success float-right comment-btn" %></div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
   </div>
 </div>

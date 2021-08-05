@@ -35,13 +35,14 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+gem 'config'
 # uploading images to google cloud using carrierwave
 # gem 'carrierwave-google-storage'
 
 # uploading images to amazon s3
 gem 'carrierwave', '~> 2.0'
 gem 'fog', '~> 1.37.0'
+gem 'cloudinary'
 # Use ActiveStorage variant - image resizing
 gem 'mini_magick', '~> 4.8'
 
@@ -52,8 +53,9 @@ gem 'mini_magick', '~> 4.8'
 gem 'bootsnap', '>= 1.1.0', require: false
 # font awesome icons
 gem 'font-awesome-sass', '~> 5.15.1'
-# thinking-sphinx for searching
-gem 'thinking-sphinx'
+# delete stroies after 24 hours
+gem 'whenever', require: false
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

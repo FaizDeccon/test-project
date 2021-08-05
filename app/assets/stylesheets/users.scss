@@ -1,3 +1,8 @@
-// Place all the styles related to the Users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.profile-pic-users{
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+}
+.border-around{
+  border: 1px solid rgb(182, 182, 182);
+}

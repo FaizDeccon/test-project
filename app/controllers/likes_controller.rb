@@ -2,12 +2,9 @@
 
 class LikesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_like, only: [:save_like]
 
   def save_like
-    @post_id = params[:post_id]
-    @like = Like.new(post_id: @post_id, user_id: current_user.id)
-    @pre_like = Like.where(post_id: @post_id, user_id: current_user.id)
-
     respond_to do |format|
       format.js do
         if @pre_like.any?
@@ -22,5 +19,13 @@ class LikesController < ApplicationController
         render 'posts/like'
       end
     end
+  end
+
+  private
+
+  def set_like
+    @post_id = params[:post_id]
+    @like = Like.new(post_id: @post_id, user_id: current_user.id)
+    @pre_like = Like.where(post_id: @post_id, user_id: current_user.id)
   end
 end
