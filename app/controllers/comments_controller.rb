@@ -10,18 +10,27 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.user_id = current_user.id if user_signed_in?
-
-    if @comment.save
-      return_url = params[:comment][:return_to].present? ? post_path(@comment.post_id) : my_feed_path
-      redirect_to return_url, flash: { success: 'Commented!' }
-    else
-      redirect_to my_feed_path, flash: { danger: 'Comment not published!' }
+    # @comment.save
+    respond_to do |format|
+      if @comment.save
+        format.js { render layout: false }   # renders create.js.erb, which could be used to redirect via javascript
+      else
+        format.html { render :action => 'create' }
+        format.js { render :action => 'create' }
+      end
     end
+
+    # if @comment.save
+    #   return_url = params[:comment][:return_to].present? ? post_path(@comment.post_id) : my_feed_path
+    #   redirect_to return_url, flash: { success: 'Commented!' }
+    # else
+    #   redirect_to my_feed_path, flash: { danger: 'Comment not published!' }
+    # end
   end
 
   private
 
   def comment_params
-    params.require(:comment).permit(:comment, :post_id, :return_to)
+    params.require(:comment).permit(:comment, :post_id)
   end
 end
