@@ -81,7 +81,7 @@ Rails.application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
-  config.gem 'carrierwave', :version => '~> 0.4.10'
+  config.gem 'carrierwave', version: '~> 0.4.10'
   config.gem 'cloudinary'
 
   # Use a different logger for distributed setups.

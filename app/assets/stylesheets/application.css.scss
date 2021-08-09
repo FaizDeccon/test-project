@@ -2,6 +2,15 @@
 @import 'bootstrap';
 @import "font-awesome-sprockets";
 @import "font-awesome";
+
+@font-face {
+  font-family: 'Billabong';
+  src: url('/fonts/FontsFree-Net-Billabong.ttf')
+}
+.alert-msg{
+  color: red;
+  text-align: center;
+}
 .profile-pic{
   border-radius: 50%;
   width: 150px;
@@ -9,6 +18,11 @@
 }
 .img-circle{
   border-radius: 50%;
+}
+.story-img-user{
+  border: 2px solid rgb(255, 96, 96);
+  padding: 2px;
+  margin-left: 15px;
 }
 .liked{
   color: red;
@@ -27,4 +41,34 @@
 }
 .m-bot-0{
   margin-bottom: 0px;
+}
+.m-left-20{
+  margin-left: 20px;
+}
+.m-right-20{
+  margin-right: 20px;
+}
+.m-left-300{
+  margin-left: 220px;
+  color: rgb(255, 132, 153);
+}
+.m-right-100{
+  margin-right: 100px;
+}
+.top-nav{
+  background-color: white;
+  border-bottom: 1px solid rgb(228, 228, 228);
+  margin-bottom: 30px;
+}
+.search-bar{
+  margin-left: 200px;
+  margin-right: 100px;
+}
+.nav-icon{
+  margin-left: 20px;
+  color: rgb(199, 199, 199) !important;
+}
+.nav-icon:hover{
+  // color: rgb(54, 54, 54) !important;
+  color: rgb(255, 132, 153) !important;
 }

@@ -1,37 +1,35 @@
 <div class="container">
   <div class="row">
     <div class="col-8 offset-2">
-      <div class="row">
+      <div class="row user-info">
         <div class="col-4">
-          <%= profile_picture(current_user, 150, 150) %>
+          <%= profile_picture(current_user, 150, 150, '') %>
         </div>
         <div class="col-8">
           <div>
-            <h1 class="profile-username"><%= current_user.username %></h1>
-            <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-secondary" %>
+            <h3 class="profile-username"><%= current_user.username %></h3>
+            <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-secondary edit-profile-btn" %>
           </div>
-          <div>
-            <%= current_user.posts.count %> posts
-            <%= current_user.total_followers %> followers
-            <%= current_user.total_following %> following<br><br>
+          <div class="stats">
+            <strong><%= current_user.posts.count %></strong> posts
+            <strong><%= current_user.total_followers %></strong> followers
+            <strong><%= current_user.total_following %></strong> following<br><br>
           </div>
-          <p><%= current_user.fullname %></p>
-          <p><%= current_user.bio %></p>
+          <strong><%= current_user.fullname %></strong><br>
+          <%= current_user.bio %>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="row">
+  <div class="row posts-preview">
     <div class="col-10 offset-1">
       <div class="row">
         <% @posts.each do |post| %>
           <div class="col-4">
             <div class="insta-post">
               <% if post.user == current_user %>
-                <% post.avatars.each do |avatar| %>
-                  <%= link_to image_tag(avatar.url, class: "img img-fluid"), post_path(post) %>
-                <% end %>
+                <%= link_to image_tag(post.avatar.url, class: "img img-fluid"), post_path(post) %>
               <% end %>
             </div>
           </div>

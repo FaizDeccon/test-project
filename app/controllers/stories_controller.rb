@@ -23,7 +23,7 @@ class StoriesController < ApplicationController
 
     respond_to do |format|
       if @story.save
-        format.html { redirect_to action: 'index', notice: 'Story successfully uploaded.' }
+        format.html { redirect_to '/feed' }
         format.json { render :index, status: :created, location: @story }
       else
         format.html { render :new, status: :unprocessable_entity }

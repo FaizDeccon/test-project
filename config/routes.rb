@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :comments, only: [:create, :index]
+  resources :comments, only: %i[create index]
   get 'post/like/:post_id' => 'likes#save_like', :as => :like_post
   devise_for :users, controllers: { registrations: 'registrations' }
   root to: 'posts#feed'

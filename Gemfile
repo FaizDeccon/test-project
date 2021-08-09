@@ -41,8 +41,8 @@ gem 'config'
 
 # uploading images to amazon s3
 gem 'carrierwave', '~> 2.0'
-gem 'fog', '~> 1.37.0'
 gem 'cloudinary'
+gem 'fog', '~> 1.37.0'
 # Use ActiveStorage variant - image resizing
 gem 'mini_magick', '~> 4.8'
 
@@ -55,7 +55,6 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'font-awesome-sass', '~> 5.15.1'
 # delete stroies after 24 hours
 gem 'whenever', require: false
-
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

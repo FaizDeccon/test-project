@@ -10,18 +10,18 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
-         #:confirmable, :lockable
+         :recoverable, :rememberable, :validatable,
+         :confirmable, :lockable
   def fullname
     "#{firstname} #{lastname}"
   end
 
   def total_followers
-    Follower.where(following_id: self.id).count
+    Follower.where(following_id: id).count
   end
 
   def total_following
-    Follower.where(follower_id: self.id).count
+    Follower.where(follower_id: id).count
   end
 
   def self.text_search(query)

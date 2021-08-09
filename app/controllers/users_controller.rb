@@ -10,8 +10,6 @@ class UsersController < ApplicationController
   def profile_page
     @user = User.find(params[:user_id])
     @following_ids = Follower.where(follower_id: current_user.id).map(&:following_id)
-    # @users = User.where.not(id: current_user.id)
-    # @users = User.text_search(params[:query])
   end
 
   def follow_user

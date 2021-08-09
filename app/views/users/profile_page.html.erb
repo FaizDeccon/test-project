@@ -1,19 +1,19 @@
 <div class="container">
   <div class="row">
     <div class="col-6 offset-3">
-      <div class="row">
+      <div class="row user-info">
         <div class="col-4">
-          <%= profile_picture(@user, 80, 80) %>
+          <%= profile_picture(@user, 80, 80, '') %>
         </div>
         <div class="col-8">
           <div>
-            <h1 class="profile-username"><%= @user.username %></h1>
+            <h3 class="profile-username"><%= @user.username %></h3>
             <% if @user == current_user %>
-              <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-secondary" %>
+              <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-secondary edit-profile-btn" %>
             <% elsif @following_ids.include? @user.id %>
-              <%= form_tag unfollow_user_path, method: :post do %>
+              <%= form_tag unfollow_user_path, method: :post, class: "follow-form" do %>
                 <%= hidden_field_tag :follow_id, @user.id %>
-                <%= submit_tag "Unfollow", class: 'btn btn-info' %>
+                <%= submit_tag "Unfollow", class: 'btn btn-primary follow-btn' %>
               <% end %>
             <% else %>
               <%= form_tag follow_user_path, method: :post do %>
@@ -22,12 +22,12 @@
               <% end %>
             <% end %>
           </div>
-          <div>
-            <%= @user.posts.count %> posts
-            <%= @user.total_followers %> followers
-            <%= @user.total_following %> following<br><br>
+          <div class="stats">
+            <strong><%= @user.posts.count %></strong> posts
+            <strong><%= @user.total_followers %></strong> followers
+            <strong><%= @user.total_following %></strong> following<br><br>
           </div>
-          <p><%= @user.fullname %></p>
+          <p><strong><%= @user.fullname %></strong></p>
           <p><%= @user.bio %></p>
         </div>
       </div>
@@ -40,9 +40,7 @@
         <% @user.posts.each do |post| %>
           <div class="col-4">
             <div class="insta-post">
-              <% post.avatars.each do |avatar| %>
-                <%= link_to image_tag(avatar.url, class: "img img-fluid"), post_path(post) %>
-              <% end %>
+              <%= link_to image_tag(post.avatar.url, class: "img img-fluid"), post_path(post) %>
             </div>
           </div>
         <% end %>

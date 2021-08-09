@@ -6,6 +6,8 @@
     <div class="col-3 offset-2 border-around m-top-15">
       <h2 class="m-top-30">Instagram</h2>
 
+      <p class="alert-msg"><%= alert %></p>
+
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="form-group m-top-15">
           <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "Email" %>

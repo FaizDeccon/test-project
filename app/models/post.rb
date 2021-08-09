@@ -5,11 +5,11 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
-  mount_uploaders :avatars, AvatarUploader
+  mount_uploader :avatar, AvatarUploader
 
-  validates :avatars, presence: true
+  validates :avatar, presence: true
 
   def liked?(user)
-    !!self.likes.find { |like| like.user_id == user.id }
+    !!likes.find { |like| like.user_id == user.id }
   end
 end

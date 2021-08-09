@@ -4,20 +4,19 @@
     <h2>New Post</h2>
       <%= form_with(model: @post, local: true) do |form| %>
         <% if @post.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from uploading:</h2>
-
-            <ul>
-            <% @post.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-            </ul>
-          </div>
+          <% @post.errors.full_messages.each do |message| %>
+            <li class="alert-msg"><%= message %></li>
+          <% end %>
+          </ul>
         <% end %>
 
+        <div class="avatar-preview">
+          <img class="show-image">
+        </div>
+
         <div class="form-group">
-          <%= form.label :avatars %>
-          <%= form.file_field :avatars, multiple: true, class: "form-control" %>
+          <%= form.label :avatar %>
+          <%= form.file_field :avatar, class: "form-control file" %>
         </div>
 
         <div class="form-group">
@@ -26,9 +25,25 @@
         </div>
 
         <div class="form-group">
-          <%= form.submit "Upload", class: "btn btn-primary form-control" %>
+          <%= form.submit "Upload", class: "btn btn-primary form-control post-submit-btn" %>
         </div>
       <% end %>
     </div>
   </div>
 </div>
+<script>
+  $(document).ready(function(){
+    var preview = $(".avatar-preview img");
+
+    $(".file").change(function(event){
+       var input = $(event.currentTarget);
+       var file = input[0].files[0];
+       var reader = new FileReader();
+       reader.onload = function(e){
+           image_base64 = e.target.result;
+           preview.attr("src", image_base64);
+       };
+       reader.readAsDataURL(file);
+    });
+  });
+</script>

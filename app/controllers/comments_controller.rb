@@ -13,10 +13,10 @@ class CommentsController < ApplicationController
     # @comment.save
     respond_to do |format|
       if @comment.save
-        format.js { render layout: false }   # renders create.js.erb, which could be used to redirect via javascript
+        format.js { render layout: false }
       else
-        format.html { render :action => 'create' }
-        format.js { render :action => 'create' }
+        format.html { render action: 'create' }
+        format.js { render action: 'create' }
       end
     end
 

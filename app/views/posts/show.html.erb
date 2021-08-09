@@ -1,27 +1,27 @@
 <div class="container">
   <div class="row">
-    <div class="post col-6">
-      <%= image_tag @post.avatars.first.url, alt: 'post' %>
+    <div class="post col-6 offset-1">
+      <%= image_tag @post.avatar.url, alt: 'post', class: "post-image-show" %>
     </div>
-    <div class="post col-3">
+    <div class="post col-4">
       <div class="post-header">
-        <%= link_to profile_picture(@post.user, 50, 50), posts_path(@post.user.username) %>
-        <strong><%= link_to @post.user.username, posts_path(@post.user.username), class: "text-dark text-decoration-none" %></strong>
+        <%= link_to profile_picture(@post.user, 50, 50, ''), posts_path(@post.user.username) %>
+        <strong><%= link_to @post.user.username, posts_path(@post.user.username), class: "text-dark text-decoration-none username-post-header" %></strong>
       </div>
       <div class="comments-scroll">
         <strong><%= link_to @post.user.username, posts_path(@post.user.username), class: "text-dark text-decoration-none" %></strong>
         <%= @post.caption %>
         <%= render "posts/comments", post: @post, comments: Comment.includes(:user).where(post_id: @post.id), feed: false %>
       </div>
-      <div class="post-responses">
+      <div class="post-responses-show">
         <i class="fas fa-heart fa-2x like-<%= @post.id %> <%= 'liked' if post_liked_by_user?(@post.id) %> like-btn" data-id="<%= @post.id %>"></i>
         <i class="far fa-comment fa-2x comment-btn"></i>
       </div>
-      <div class="post-footer">
+      <div class="post-footer-show">
         <p id="post-<%= @post.id %>-likes"><%= @post.total_likes %> likes</p>
         <p class="text-muted"><%= time_ago_in_words @post.created_at %> ago</p>
       </div>
-      <div class="post-comment">
+      <div class="post-comment-show">
         <%= form_with class: "comment-form", model: (@comment) do |f| %>
           <% f.hidden_field :post_id, value: @post.id %>
           <div class="input-group">
