@@ -12,15 +12,16 @@ Rails.application.configure do
   # Rake tasks automatically ignore this option for performance.
   config.eager_load = true
   # default mailer config
-  config.action_mailer.default_url_options = { host: 'https://infinite-springs-66673.herokuapp.com/' }
+  config.action_mailer.default_url_options = { host: 'infinite-springs-66673.herokuapp.com' }
   config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: 'smtp.gmail.com',
     port: 587,
-    user_name: 'faiz.ali@devsinc.com',
-    password: 'lwhwtsuzqtibepsy',
-    domain: 'https://infinite-springs-66673.herokuapp.com/',
+    user_name: ENV['GMAIL_MAIL'],
+    password: ENV['GMAIL_PASSWORD'],
+    domain: 'mail.google.com',
     authentication: 'plain',
     enable_starttls_auto: true
   }
