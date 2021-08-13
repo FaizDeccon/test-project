@@ -1,12 +1,9 @@
 <div class="container">
   <div class="row">
     <h3>Searched Users</h3>
-    <% @users.each do |user| %>
-      <div class="col-6 offset-3 searched-user">
-        <%= link_to profile_picture(user, 80, 80, ''), profile_path(:user_id => user.id) %>
-        <%= link_to user.username, profile_path(:user_id => user.id), class: "text-dark text-decoration-none username-post-header" %>
-      </div>
-    <% end %>
+    <div class="col-6 offset-3 searched-user">
+      <%= react_component('ShowUsers', searched_users: @users) %>
+    </div>
   </div>
 </div>
 

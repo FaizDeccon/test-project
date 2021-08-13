@@ -10,7 +10,6 @@ class PostsController < ApplicationController
 
   def feed
     @posts = Post.all
-    # @posts = Post.where(post_id: )
     @comment = Comment.new
     @following_ids = Follower.where(follower_id: current_user.id).map(&:following_id)
     @users = User.all

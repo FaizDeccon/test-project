@@ -6,35 +6,11 @@
           <%= profile_picture(current_user, 150, 150, '') %>
         </div>
         <div class="col-8">
-          <div>
-            <h3 class="profile-username"><%= current_user.username %></h3>
-            <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-secondary edit-profile-btn" %>
-          </div>
-          <div class="stats">
-            <strong><%= current_user.posts.count %></strong> posts
-            <strong><%= current_user.total_followers %></strong> followers
-            <strong><%= current_user.total_following %></strong> following<br><br>
-          </div>
-          <strong><%= current_user.fullname %></strong><br>
-          <%= current_user.bio %>
+          <% user_info = [current_user, current_user.posts.count, current_user.total_followers, current_user.total_following, current_user.fullname] %>
+          <%= react_component('Main', userinfo: user_info) %>
         </div>
       </div>
     </div>
   </div>
-
-  <div class="row posts-preview">
-    <div class="col-10 offset-1">
-      <div class="row">
-        <% @posts.each do |post| %>
-          <div class="col-4">
-            <div class="insta-post">
-              <% if post.user == current_user %>
-                <%= link_to image_tag(post.avatar.url, class: "img img-fluid"), post_path(post) %>
-              <% end %>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
 </div>
+
